@@ -63,13 +63,13 @@
                         <TextBlock Grid.Column="0" Grid.Row="5" VerticalAlignment="Center">Давление в реакторе, <controls:FormulaControl Formula="A"/></TextBlock>
                         <TextBlock Grid.Column="0" Grid.Row="6" VerticalAlignment="Center">Количество теплообменных устройств, <controls:FormulaControl Formula="N"/></TextBlock>
 
-                        <xctk:DoubleUpDown Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"/>
-                        <xctk:DoubleUpDown Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
-                        <xctk:DoubleUpDown Grid.Column="1" Grid.Row="2" VerticalAlignment="Center"/>
-                        <xctk:DoubleUpDown Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"/>
-                        <xctk:DoubleUpDown Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"/>
-                        <xctk:DoubleUpDown Grid.Column="1" Grid.Row="5" VerticalAlignment="Center"/>
-                        <xctk:DoubleUpDown Grid.Column="1" Grid.Row="6" VerticalAlignment="Center"/>
+                        <xctk:DoubleUpDown Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Value="{Binding DataModel.Alpha}"/>
+                        <xctk:DoubleUpDown Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Value="{Binding DataModel.Beta}"/>
+                        <xctk:DoubleUpDown Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Value="{Binding DataModel.Mu}"/>
+                        <xctk:DoubleUpDown Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Value="{Binding DataModel.Delta}"/>
+                        <xctk:DoubleUpDown Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Value="{Binding DataModel.G}"/>
+                        <xctk:DoubleUpDown Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Value="{Binding DataModel.A}"/>
+                        <xctk:DoubleUpDown Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" Value="{Binding DataModel.N}"/>
 
                         <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"></TextBlock>
                         <TextBlock Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"></TextBlock>
@@ -100,12 +100,12 @@
                         <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"><controls:FormulaControl Formula="\le T_2 \le"/></TextBlock>
                         <TextBlock Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"><controls:FormulaControl Formula="T_1 + T_2 \le"/></TextBlock>
 
-                        <xctk:DoubleUpDown Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="80"></xctk:DoubleUpDown>
-                        <xctk:DoubleUpDown Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Width="80"></xctk:DoubleUpDown>
+                        <xctk:DoubleUpDown Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="80" Value="{Binding DataModel.T1Min}"/>
+                        <xctk:DoubleUpDown Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Width="80" Value="{Binding DataModel.T2Min}"/>
 
-                        <xctk:DoubleUpDown Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="80"></xctk:DoubleUpDown>
-                        <xctk:DoubleUpDown Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="80"></xctk:DoubleUpDown>
-                        <xctk:DoubleUpDown Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Width="80"></xctk:DoubleUpDown>
+                        <xctk:DoubleUpDown Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="80" Value="{Binding DataModel.T1Max}"/>
+                        <xctk:DoubleUpDown Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="80" Value="{Binding DataModel.T2Max}"/>
+                        <xctk:DoubleUpDown Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Width="80" Value="{Binding DataModel.TSumMax}"/>
 
                     </Grid>
                 </GroupBox>
