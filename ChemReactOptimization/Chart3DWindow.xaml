@@ -1,0 +1,18 @@
+﻿<Window x:Class="ChemReactOptimization.Chart3DWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChemReactOptimization"
+        xmlns:chartDirector="clr-namespace:ChartDirector;assembly=ChartDirector.Net.Desktop.Controls"
+        mc:Ignorable="d"
+        Title="3D-график" Loaded="Chart3DWindow_OnLoaded" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+    <StackPanel>
+        <DockPanel Background="#FFDDDDDD" >
+            <CheckBox x:Name="DrawFrameOnRotate" Content="Перерисовывать кадр при повороте" Margin="8" IsChecked="True" />
+        </DockPanel>
+        <chartDirector:WPFChartViewer x:Name="WPFChartViewer1" Width="680" Height="580" Margin="8,8,0,0" Grid.Row="0" Grid.Column="0" ViewPortChanged="WPFChartViewer1_ViewPortChanged" 
+                                      MouseMoveChart="WPFChartViewer1_MouseMoveChart" MouseUp="WPFChartViewer1_MouseUpChart"
+        />
+    </StackPanel>
+</Window>

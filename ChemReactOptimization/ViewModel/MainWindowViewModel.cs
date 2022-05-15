@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media.Media3D;
+using System.Windows;
 using ChemReactOptimization.Model;
 using WPF_MVVM_Classes;
 using ViewModelBase = ChemReactOptimization.Services.ViewModelBase;
@@ -14,9 +14,8 @@ namespace ChemReactOptimization.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
 
-        //private RelayCommand? _calculateCommand;
-        //private IEnumerable _dataList;
-        //private List<Point3D> _point3D = new();
+        private RelayCommand? _startButtonCommand;
+        private IEnumerable _dataList;
 
         private DataModel _dataModel = new DataModel()
         {
@@ -44,26 +43,63 @@ namespace ChemReactOptimization.ViewModel
             }
         }
 
-        //public IEnumerable DataList
-        //{
-        //    get => _dataList;
-        //    set
-        //    {
-        //        _dataList = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
+        public IEnumerable DataList
+        {
+            get => _dataList;
+            set
+            {
+                _dataList = value;
+                OnPropertyChanged();
+            }
+        }
 
-        //public RelayCommand CalculateCommand
-        //{
-        //    get
-        //    {
-        //        return _calculateCommand ??= new RelayCommand(c =>
-        //        {
-                    
-        //        });
-        //    }
-        //}
+        public RelayCommand StartButtonCommand
+        {
+            get
+            {
+                return _startButtonCommand ??= new RelayCommand(c =>
+                {
+                    string errString = String.Empty;
+                    if (DataModel.T1Min > DataModel.T1Max)
+                        errString += "Минимальное значение Т1 не может быть больше максимального\n";
+                    if (DataModel.T2Min > DataModel.T2Max)
+                        errString += "Минимальное значение Т2 не может быть больше максимального\n";
+                    if (DataModel.TSumMax <= 0)
+                        errString += "Сумма Т1 и Т2 должна быть положительной";
+                    if (errString.Length > 0)
+                        MessageBox.Show(errString, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    else
+                    {
+                        OptimizationMethod.Start(DataModel, out var point3D);
+                        DataList = point3D;
+                    }
+                });
+            }
+        }
+
+        public RelayCommand Chart2DCommand
+        {
+            get
+            {
+                return new RelayCommand(r =>
+                {
+                    var test = new Chart2DWindow(DataList as List<Point3D>, DataModel);
+                    test.Show();
+                });
+            }
+        }
+
+        public RelayCommand Chart3DCommand
+        {
+            get
+            {
+                return new RelayCommand(r =>
+                {
+                    var test = new Chart3DWindow(DataList as List<Point3D>, DataModel);
+                    test.Show();
+                });
+            }
+        }
 
     }
 }
