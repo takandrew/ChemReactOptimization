@@ -24,6 +24,18 @@ namespace ChemReactOptimization.Model
 
         public static int num_of_functioncalls = 0;
 
+        private static bool ConditionChecking(double t1, double t2)
+        {
+            if ((OptDataModel.T1Min <= t1) &&
+                (t1 <= OptDataModel.T1Max) &&
+                (OptDataModel.T2Min <= t2) &&
+                (t2 <= OptDataModel.T2Max) &&
+                (t1 + t2 <= OptDataModel.TSumMax))
+                return true;
+            else
+                return false;
+        }
+
         public static double CalculateFuncValue(double[] x)
         {
             num_of_functioncalls++;
@@ -31,11 +43,7 @@ namespace ChemReactOptimization.Model
                                     (Math.Pow((x[1] - OptDataModel.Beta * OptDataModel.A), OptDataModel.N) +
                                      OptDataModel.Mu * Math.Pow(Math.Exp(x[0] + x[1]), OptDataModel.N) +
                                      OptDataModel.Delta * (x[1] - x[0])));
-            if ((OptDataModel.T1Min <= x[0]) &&
-                (x[0] <= OptDataModel.T1Max) && 
-                (OptDataModel.T2Min <= x[1]) &&
-                (x[1] <= OptDataModel.T2Max) &&
-                (x[0] + x[1] <= OptDataModel.TSumMax)) 
+            if (ConditionChecking(x[0],x[1])) 
                 resultList.Add(new Point3D(Math.Round(x[0],4), Math.Round(x[1], 4), Math.Round(targetFuncValue, 4)));
             return targetFuncValue;
         }
@@ -164,7 +172,7 @@ namespace ChemReactOptimization.Model
                 }
 
             }
-            
+
             return simplex[0];
         }
 
@@ -183,6 +191,7 @@ namespace ChemReactOptimization.Model
             var minValue = points3D.FirstOrDefault(x => x.X == Math.Round(result[0], 4) && x.Y == Math.Round(result[1], 4));
             toBeShown += $"\nМинимум: {minValue.Z}";
             MessageBox.Show(toBeShown);
+
             num_of_functioncalls = 0;
 
         }
