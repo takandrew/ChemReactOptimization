@@ -17,6 +17,16 @@ namespace ChemReactOptimization.ViewModel
         private RelayCommand? _startButtonCommand;
         private IEnumerable _dataList;
 
+        private int _methodSelected = 0;
+
+
+        private List<string> _methodList = new List<string>()
+        {
+            "Метод Нелдера-Мида",
+            "Метод Бокса",
+            "Метод Сканирования с постоянным шагом"
+        };
+
         private DataModel _dataModel = new DataModel()
         {
             Alpha = 1,
@@ -53,6 +63,26 @@ namespace ChemReactOptimization.ViewModel
             }
         }
 
+        public List<string> MethodList
+        {
+            get => _methodList;
+            set
+            {
+                _methodList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int MethodSelected
+        {
+            get => _methodSelected;
+            set
+            {
+                _methodSelected = value;
+                OnPropertyChanged();
+            }
+        }
+
         public RelayCommand StartButtonCommand
         {
             get
@@ -70,8 +100,15 @@ namespace ChemReactOptimization.ViewModel
                         MessageBox.Show(errString, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     else
                     {
-                        OptimizationMethod.Start(DataModel, out var point3D);
-                        DataList = point3D;
+                        if (MethodSelected == MethodList.FindIndex(x => x.Contains("Нелдер")))
+                        {
+                            MethodNelderMead.Start(DataModel, out var point3D);
+                            DataList = point3D;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Данный метод еще не реализован в программном комплексе", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                 });
             }
