@@ -18,6 +18,7 @@ namespace ChemReactOptimization.ViewModel
         private IEnumerable _dataList;
 
         private int _methodSelected = 0;
+        private int _taskSelected = 0;
 
 
         private List<string> _methodList = new List<string>()
@@ -25,6 +26,13 @@ namespace ChemReactOptimization.ViewModel
             "Метод Нелдера-Мида",
             "Метод Бокса",
             "Метод Сканирования с постоянным шагом"
+        };
+
+        private List<string> _taskList = new List<string>()
+        {
+            "Вариант 8",
+            "Вариант 9",
+            "Вариант 10"
         };
 
         private DataModel _dataModel = new DataModel()
@@ -83,32 +91,59 @@ namespace ChemReactOptimization.ViewModel
             }
         }
 
+        public List<string> TaskList
+        {
+            get => _taskList;
+            set
+            {
+                _taskList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int TaskSelected
+        {
+            get => _taskSelected;
+            set
+            {
+                _taskSelected = value;
+                OnPropertyChanged();
+            }
+        }
+
         public RelayCommand StartButtonCommand
         {
             get
             {
                 return _startButtonCommand ??= new RelayCommand(c =>
                 {
-                    string errString = String.Empty;
-                    if (DataModel.T1Min > DataModel.T1Max)
-                        errString += "Минимальное значение Т1 не может быть больше максимального\n";
-                    if (DataModel.T2Min > DataModel.T2Max)
-                        errString += "Минимальное значение Т2 не может быть больше максимального\n";
-                    if (DataModel.TSumMax <= 0)
-                        errString += "Сумма Т1 и Т2 должна быть положительной";
-                    if (errString.Length > 0)
-                        MessageBox.Show(errString, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    else
+                    if (TaskSelected == TaskList.FindIndex(x => x.Contains("8")))
                     {
-                        if (MethodSelected == MethodList.FindIndex(x => x.Contains("Нелдер")))
-                        {
-                            MethodNelderMead.Start(DataModel, out var point3D);
-                            DataList = point3D;
-                        }
+                        string errString = String.Empty;
+                        if (DataModel.T1Min > DataModel.T1Max)
+                            errString += "Минимальное значение Т1 не может быть больше максимального\n";
+                        if (DataModel.T2Min > DataModel.T2Max)
+                            errString += "Минимальное значение Т2 не может быть больше максимального\n";
+                        if (DataModel.TSumMax <= 0)
+                            errString += "Сумма Т1 и Т2 должна быть положительной";
+                        if (errString.Length > 0)
+                            MessageBox.Show(errString, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         else
                         {
-                            MessageBox.Show("Данный метод еще не реализован в программном комплексе", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                            if (MethodSelected == MethodList.FindIndex(x => x.Contains("Нелдер")))
+                            {
+                                MethodNelderMead.Start(DataModel, out var point3D);
+                                DataList = point3D;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Данный метод еще не реализован в программном комплексе", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Данная задача еще не реализован в программном комплексе", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 });
             }
