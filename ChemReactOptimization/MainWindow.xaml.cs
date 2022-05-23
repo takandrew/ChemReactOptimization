@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,14 @@ namespace ChemReactOptimization
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyDescriptor is PropertyDescriptor descriptor)
+            {
+                e.Column.Header = descriptor.DisplayName ?? descriptor.Name;
+            }
         }
     }
 }

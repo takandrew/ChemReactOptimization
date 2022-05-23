@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace ChemReactOptimization.Model
 {
-    public class OptimizationMethod
+    public class MethodNelderMead
     {
 
         private static DataModel _optDataModel = new DataModel();
@@ -100,7 +100,7 @@ namespace ChemReactOptimization.Model
                 }
 
                 // Check for convergence
-                if (Math.Abs(function(centroid) - functionValues[0]) < 1e-5)
+                if (Math.Abs(function(centroid) - functionValues[0]) < 1e-5 /*0.01*/)
                 {
                     break;
                 }

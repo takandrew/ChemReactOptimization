@@ -128,14 +128,16 @@
                             <ColumnDefinition Width="0.25*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Button Grid.Column="1" VerticalAlignment="Center" Height="30" Command="{Binding StartButtonCommand}">Рассчитать</Button>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center">Выберите метод:</TextBlock>
+                        <ComboBox Grid.Column="1" VerticalAlignment="Center" ItemsSource="{Binding MethodList}" SelectedIndex="{Binding MethodSelected}"></ComboBox>
+                        <Button Grid.Column="2" VerticalAlignment="Center" Margin="5" Height="30" Command="{Binding StartButtonCommand}">Рассчитать</Button>
 
                     </Grid>
                 </GroupBox>
             </Grid>
 
             <Grid Grid.Column="1">
-                <DataGrid Margin="5,5" ColumnWidth="*" ItemsSource="{Binding DataList}"></DataGrid>
+                <DataGrid Margin="5,5" ColumnWidth="*" ItemsSource="{Binding DataList}" AutoGeneratingColumn="OnAutoGeneratingColumn"></DataGrid>
             </Grid>
 
         </Grid>

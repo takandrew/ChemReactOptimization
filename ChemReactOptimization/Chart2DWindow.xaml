@@ -16,7 +16,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <chartDirector:WPFChartViewer x:Name="WPFChartViewer1" Width="600" Height="500" Margin="8,8,0,0" Grid.Row="0" Grid.Column="0" 
+        <chartDirector:WPFChartViewer x:Name="WPFChartViewer1" Width="600" Height="600" Margin="8,8,0,0" Grid.Row="0" Grid.Column="0" 
         />
     </Grid>
 </Window>
