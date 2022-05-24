@@ -57,31 +57,37 @@ namespace ChemReactOptimization
         //Note: the argument chartIndex is unused because this demo only has 1 chart.
         public void createChart(WPFChartViewer viewer, int chartIndex)
         {
-            double[] dataX = new double[] { -18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7 };
-            double[] dataY = new double[] { -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8 };
-            double[] dataZ = new double[dataX.Length * dataY.Length];
-            var k = 0;
-            for (int i = 0; i < dataX.Length; i++)
+            var dataX = new List<double>();
+            var dataY = new List<double>();
+            var step = 1;
+
+            for (double i = _dataModel.T1Min - step; i < _dataModel.T1Max + step; i += step)
             {
-                for (int j = 0; j < dataY.Length; j++)
+                dataX.Add(i);
+            }
+            for (double i = _dataModel.T2Min - step; i < _dataModel.T2Max + step; i += step)
+            {
+                dataY.Add(i);
+            }
+            var dataZ = new List<double>();
+
+            for (int i = 0; i < dataX.Count; i++)
+            {
+                for (int j = 0; j < dataY.Count; j++)
                 {
-                    if (Math.Abs(dataY[j] - dataX[i]) < 2)
-                    {
-                        dataZ[k] = -1;
-                        k++;
-                    }
+                    dataZ.Add(0);
+                }
+            }
+
+            for (int i = 0; i < dataX.Count; i++)
+            {
+                for (int j = 0; j < dataY.Count; j++)
+                {
+                    var currentValue = MathModel.TargetFunction(_dataModel, dataX[i], dataY[j]);
+                    if (currentValue < 1000)
+                        dataZ[j * dataX.Count + i] = currentValue;
                     else
-                    {
-                        if (MathModel.TargetFunction(_dataModel, dataX[i], dataY[j]) < 1000)
-                        {
-                            dataZ[k] = MathModel.TargetFunction(_dataModel, dataX[i], dataY[j]);
-                        }
-                        else
-                        {
-                            dataZ[k] = 1000;
-                        }
-                        k++;
-                    }
+                        dataZ[j * dataX.Count + i] = 1000;
                 }
             }
 
@@ -98,7 +104,7 @@ namespace ChemReactOptimization
                 c.setShadingMode(Chart.RectangularFrame);
 
             // Set the data to use to plot the chart
-            c.setData(dataX, dataY, dataZ);
+            c.setData(dataX.ToArray(), dataY.ToArray(), dataZ.ToArray());
 
             // Spline interpolate data to a 80 x 80 grid for a smooth surface
             c.setInterpolation(80, 80);
