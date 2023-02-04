@@ -1,15 +1,14 @@
-﻿namespace ChemReactOptimization.Model
+namespace ChemReactOptimization.Model
 {
-    public class DataModel
+    public class Task
     {
-        #region NormalizingFactors
+        public int Id { get; set; }
+        public string Name { get; set; }
 
         public double Alpha { get; set; }
         public double Beta { get; set; }
         public double Mu { get; set; }
         public double Delta { get; set; }
-
-        #endregion
 
         public double G { get; set; } // Reaction mass consumption
         public double A { get; set; } // Reactor pressure
@@ -19,6 +18,5 @@
         public double T2Min { get; set; } // Diffuser temperature MIN
         public double T2Max { get; set; } // Diffuser temperature MAX
         public double TSumMax { get; set; } // T1+T2 <= TSumMax
-
     }
 }

@@ -2,9 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using ChemReactOptimization.Data;
 using ChemReactOptimization.Model;
 using WPF_MVVM_Classes;
 using ViewModelBase = ChemReactOptimization.Services.ViewModelBase;
@@ -13,43 +12,30 @@ namespace ChemReactOptimization.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private readonly EFMethods _efMethods;
+        private readonly EFTasks _efTasks;
+        private readonly EFUsers _efUsers;
+
+        private IEnumerable<Method> _methodList = new List<Method>();
+        private IEnumerable<Task> _taskList = new List<Task>();
+
+        public MainWindowViewModel(EFMethods efMethods, EFTasks efTasks, EFUsers efUsers)
+        {
+            _efMethods = efMethods;
+            _efTasks = efTasks;
+            _efUsers = efUsers;
+
+            _methodList = efMethods.GetAllMethods();
+            _taskList = efTasks.GetAllTasks();
+        }
 
         private RelayCommand? _startButtonCommand;
         private IEnumerable _dataList;
 
-        private int _methodSelected = 0;
-        private int _taskSelected = 0;
+        private Method _methodSelected = new Method();
+        private Task _taskSelected = new Task();
 
-
-        private List<string> _methodList = new List<string>()
-        {
-            "Метод Нелдера-Мида",
-            "Метод Бокса",
-            "Метод Сканирования с постоянным шагом"
-        };
-
-        private List<string> _taskList = new List<string>()
-        {
-            "Вариант 8",
-            "Вариант 9",
-            "Вариант 10"
-        };
-
-        private DataModel _dataModel = new DataModel()
-        {
-            Alpha = 1,
-            Beta = 1,
-            Mu = 1, 
-            Delta = 1,
-            G = 1,
-            A = 1, 
-            N = 2,
-            T1Min = -18,
-            T1Max = 7,
-            T2Min = -8, 
-            T2Max = 8,
-            TSumMax = 4
-        };
+        private DataModel _dataModel = new DataModel();
 
         public DataModel DataModel
         {
@@ -71,7 +57,7 @@ namespace ChemReactOptimization.ViewModel
             }
         }
 
-        public List<string> MethodList
+        public IEnumerable<Method> MethodList
         {
             get => _methodList;
             set
@@ -81,7 +67,7 @@ namespace ChemReactOptimization.ViewModel
             }
         }
 
-        public int MethodSelected
+        public Method MethodSelected
         {
             get => _methodSelected;
             set
@@ -91,7 +77,7 @@ namespace ChemReactOptimization.ViewModel
             }
         }
 
-        public List<string> TaskList
+        public IEnumerable<Task> TaskList
         {
             get => _taskList;
             set
@@ -101,12 +87,27 @@ namespace ChemReactOptimization.ViewModel
             }
         }
 
-        public int TaskSelected
+        public Task TaskSelected
         {
             get => _taskSelected;
             set
             {
                 _taskSelected = value;
+                DataModel = new DataModel
+                {
+                    Alpha = TaskSelected.Alpha,
+                    Beta = TaskSelected.Beta,
+                    Mu = TaskSelected.Mu,
+                    Delta = TaskSelected.Delta,
+                    G = TaskSelected.G,
+                    A = TaskSelected.A,
+                    N = TaskSelected.N,
+                    T1Min = TaskSelected.T1Min,
+                    T1Max = TaskSelected.T1Max,
+                    T2Min = TaskSelected.T2Min,
+                    T2Max = TaskSelected.T2Max,
+                    TSumMax = TaskSelected.TSumMax
+                };
                 OnPropertyChanged();
             }
         }
@@ -117,7 +118,7 @@ namespace ChemReactOptimization.ViewModel
             {
                 return _startButtonCommand ??= new RelayCommand(c =>
                 {
-                    if (TaskSelected == TaskList.FindIndex(x => x.Contains("8")))
+                    if (TaskSelected.Id == TaskList.FirstOrDefault(x => x.Name.Contains("1")).Id)
                     {
                         string errString = String.Empty;
                         if (DataModel.T1Min > DataModel.T1Max)
@@ -130,7 +131,7 @@ namespace ChemReactOptimization.ViewModel
                             MessageBox.Show(errString, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         else
                         {
-                            if (MethodSelected == MethodList.FindIndex(x => x.Contains("Нелдер")))
+                            if (MethodSelected.Id == MethodList.FirstOrDefault(x => x.Name.Contains("Нелдер")).Id)
                             {
                                 MethodNelderMead.Start(DataModel, out var point3D);
                                 DataList = point3D;

@@ -56,7 +56,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" VerticalAlignment="Center">Выберите задачу:</TextBlock>
-                        <ComboBox Grid.Column="1" VerticalAlignment="Center" ItemsSource="{Binding TaskList}" SelectedIndex="{Binding TaskSelected}"></ComboBox>
+                        <ComboBox Grid.Column="1" VerticalAlignment="Center" ItemsSource="{Binding TaskList}" DisplayMemberPath="Name" SelectedItem="{Binding TaskSelected}"></ComboBox>
                     </Grid>
                 </GroupBox>
 
@@ -143,7 +143,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" VerticalAlignment="Center">Выберите метод:</TextBlock>
-                        <ComboBox Grid.Column="1" VerticalAlignment="Center" ItemsSource="{Binding MethodList}" SelectedIndex="{Binding MethodSelected}"></ComboBox>
+                        <ComboBox Grid.Column="1" VerticalAlignment="Center" ItemsSource="{Binding MethodList}" DisplayMemberPath="Name" SelectedItem="{Binding MethodSelected}"></ComboBox>
                         <Button Grid.Column="2" VerticalAlignment="Center" Margin="5" Height="30" Command="{Binding StartButtonCommand}">Рассчитать</Button>
 
                     </Grid>

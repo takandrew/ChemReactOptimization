@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using ChemReactOptimization.ViewModel;
 using Autofac;
+using ChemReactOptimization.Data;
 
 namespace ChemReactOptimization
 {
@@ -18,6 +13,10 @@ namespace ChemReactOptimization
         protected override void OnStartup(StartupEventArgs e)
         {
             var builder = new ContainerBuilder();
+            builder.RegisterType<EFMethods>().AsSelf();
+            builder.RegisterType<EFTasks>().AsSelf();
+            builder.RegisterType<EFUsers>().AsSelf();
+            builder.RegisterType<ChemReactContext>().AsSelf();
             builder.RegisterType<MainWindowViewModel>().AsSelf();
 
             var container = builder.Build();
