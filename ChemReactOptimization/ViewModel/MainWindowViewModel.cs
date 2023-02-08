@@ -118,7 +118,7 @@ namespace ChemReactOptimization.ViewModel
             {
                 return _startButtonCommand ??= new RelayCommand(c =>
                 {
-                    if (TaskSelected.Id == TaskList.FirstOrDefault(x => x.Name.Contains("1")).Id)
+                    if (TaskSelected.Name != null)
                     {
                         string errString = String.Empty;
                         if (DataModel.T1Min > DataModel.T1Max)
@@ -144,7 +144,7 @@ namespace ChemReactOptimization.ViewModel
                     }
                     else
                     {
-                        MessageBox.Show("Данная задача еще не реализован в программном комплексе", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Выберите состояние.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 });
             }

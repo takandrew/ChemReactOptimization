@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:ChemReactOptimization"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1000" Width="1200" MinHeight="1000" MinWidth="1200">
+        Title="Исследователь" Height="1000" Width="1200" MinHeight="1000" MinWidth="1200">
     <Grid>
 
         <Grid.RowDefinitions>

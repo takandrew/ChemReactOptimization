@@ -78,6 +78,13 @@ namespace ChemReactOptimization.ViewModel
                                 mainWindow.Show();
                                 Application.Current.MainWindow.Close();
                             }
+                            else if (user.Role == "Administrator")
+                            {
+                                var adminWindow = new AdminWindow();
+                                adminWindow.DataContext = new AdminWindowViewModel(_efMethods, _efTasks, _efUsers);
+                                adminWindow.Show();
+                                Application.Current.MainWindow.Close();
+                            }
                         }
                     }
                 });
