@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ChemReactOptimization.Model;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using ChemReactOptimization.Model;
 
 namespace ChemReactOptimization
 {

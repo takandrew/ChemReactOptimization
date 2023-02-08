@@ -18,18 +18,27 @@ public class EFMethods
         return _context.Methods.ToList();
     }
 
-    public Method GetById(long id)
+    public Method GetById(int id)
     {
         return _context.Methods.First(m => m.Id == id);
     }
 
     public void SaveMethod(Method method)
     {
-        _context.Methods.Add(method);
+        if (method.Id == 0)
+            _context.Methods.Add(method);
+        else
+        {
+            var dbEntry = _context.Methods.FirstOrDefault(u => u.Id == method.Id);
+            if (dbEntry != null)
+            {
+                dbEntry.Name = method.Name;
+            }
+        }
         _context.SaveChanges();
     }
 
-    public void DeleteMethod(long id)
+    public void DeleteMethod(int id)
     {
         var value = _context.Methods.Find(id);
         if (value != null)

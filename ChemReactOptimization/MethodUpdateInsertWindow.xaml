@@ -1,0 +1,20 @@
+﻿<Window x:Class="ChemReactOptimization.MethodUpdateInsertWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChemReactOptimization"
+        mc:Ignorable="d"
+        Title="{Binding MethodUpdateInsertWindowTitle}" Height="300" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">Наименование</Label>
+        <TextBox Grid.Row="1" HorizontalAlignment="Center"  Width="200" Height="30" Text="{Binding EdMethod.Name}"></TextBox>
+        <Button Grid.Row="2" Command="{Binding DoneCommand}" Width="200" Height="30">Готово</Button>
+    </Grid>
+</Window>

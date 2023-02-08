@@ -27,7 +27,7 @@ public class EFUsers
             return false;
     }
 
-    public User GetById(long id)
+    public User GetById(int id)
     {
         return _context.Users.First(m => m.Id == id);
     }
@@ -41,6 +41,7 @@ public class EFUsers
             var dbEntry = _context.Users.FirstOrDefault(u => u.Id == user.Id);
             if (dbEntry != null)
             {
+                dbEntry.Name = user.Name;
                 dbEntry.Login = user.Login;
                 dbEntry.Password = user.Password;
                 dbEntry.Role = user.Role;
@@ -49,7 +50,7 @@ public class EFUsers
         _context.SaveChanges();
     }
 
-    public void DeleteUser(long id)
+    public void DeleteUser(int id)
     {
         var value = _context.Users.Find(id);
         if (value != null)

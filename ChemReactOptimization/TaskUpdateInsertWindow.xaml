@@ -1,0 +1,57 @@
+﻿<Window x:Class="ChemReactOptimization.TaskUpdateInsertWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChemReactOptimization"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="{Binding TaskUpdateInsertWindowTitle}" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">Наименование</Label>
+        <TextBox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"  Width="200" Height="30" Text="{Binding EdTask.Name}"></TextBox>
+        <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom">α</Label>
+        <xctk:DoubleUpDown Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"  Width="200" Height="30" Text="{Binding EdTask.Alpha}"></xctk:DoubleUpDown>
+        <Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">β</Label>
+        <xctk:DoubleUpDown Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"  Width="200" Height="30" Text="{Binding EdTask.Beta}"></xctk:DoubleUpDown>
+        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">μ</Label>
+        <xctk:DoubleUpDown Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center"  Width="200" Height="30" Text="{Binding EdTask.Mu}"></xctk:DoubleUpDown>
+        <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom">Δ</Label>
+        <xctk:DoubleUpDown Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center"  Width="200" Height="30" Text="{Binding EdTask.Delta}"></xctk:DoubleUpDown>
+        <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">Расход реакционной массы, кг/ч</Label>
+        <xctk:DoubleUpDown Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center"  Width="200" Height="30" Text="{Binding EdTask.G}"></xctk:DoubleUpDown>
+        <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">Давление в реакторе, Кпа</Label>
+        <xctk:DoubleUpDown Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center"  Width="200" Height="30" Text="{Binding EdTask.A}"></xctk:DoubleUpDown>
+        <Label Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom">Количество теплообменных устройств, шт</Label>
+        <xctk:IntegerUpDown Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center"  Width="200" Height="30" Text="{Binding EdTask.N}"></xctk:IntegerUpDown>
+        <Label Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">Мин. температура Т1, ℃</Label>
+        <xctk:DoubleUpDown Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center"  Width="200" Height="30" Text="{Binding EdTask.T1Min}"></xctk:DoubleUpDown>
+        <Label Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">Макс. температура Т1, ℃</Label>
+        <xctk:DoubleUpDown Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center"  Width="200" Height="30" Text="{Binding EdTask.T1Max}"></xctk:DoubleUpDown>
+        <Label Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom">Мин. температура Т2, ℃</Label>
+        <xctk:DoubleUpDown Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center"  Width="200" Height="30" Text="{Binding EdTask.T2Min}"></xctk:DoubleUpDown>
+        <Label Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">Макс. температура Т2, ℃</Label>
+        <xctk:DoubleUpDown Grid.Row="7" Grid.Column="2" HorizontalAlignment="Center"  Width="200" Height="30" Text="{Binding EdTask.T2Max}"></xctk:DoubleUpDown>
+        <Label Grid.Row="8" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">Сумма температур, ℃</Label>
+        <xctk:DoubleUpDown Grid.Row="9" Grid.Column="0" HorizontalAlignment="Center"  Width="200" Height="30" Text="{Binding EdTask.TSumMax}"></xctk:DoubleUpDown>
+        <Button Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Command="{Binding DoneCommand}" Width="200" Height="30">Готово</Button>
+    </Grid>
+</Window>
