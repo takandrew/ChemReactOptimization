@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChemReactOptimization"
         mc:Ignorable="d"
-        Title="Авторизация" Height="230" Width="300">
+        Title="Авторизация" Height="250" Width="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -15,9 +15,9 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">Логин</Label>
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" Width="200" Height="30" Text="{Binding Login}"></TextBlock>
+        <TextBox Grid.Row="1" HorizontalAlignment="Center" Width="200" Height="30" Text="{Binding Login}"></TextBox>
         <Label Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">Пароль</Label>
-        <TextBlock Grid.Row="3" HorizontalAlignment="Center" Width="200" Height="30" Text="{Binding Password}"></TextBlock>
+        <TextBox Grid.Row="3" HorizontalAlignment="Center" Width="200" Height="30" Text="{Binding Password}"></TextBox>
         <Button Grid.Row="4" HorizontalAlignment="Center" Width="200" Height="30" Command="{Binding LogInCommand}">Войти</Button>
     </Grid>
 </Window>

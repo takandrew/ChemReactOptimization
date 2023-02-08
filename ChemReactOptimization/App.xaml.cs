@@ -17,12 +17,12 @@ namespace ChemReactOptimization
             builder.RegisterType<EFTasks>().AsSelf();
             builder.RegisterType<EFUsers>().AsSelf();
             builder.RegisterType<ChemReactContext>().AsSelf();
-            builder.RegisterType<MainWindowViewModel>().AsSelf();
+            builder.RegisterType<AuthorizationWindowViewModel>().AsSelf();
 
             var container = builder.Build();
-            var mainWindowViewModel = container.Resolve<MainWindowViewModel>();
-            var mainWindow = new MainWindow { DataContext = mainWindowViewModel };
-            mainWindow.Show();
+            var authorizationWindowViewModel = container.Resolve<AuthorizationWindowViewModel>();
+            var authorizationWindow = new AuthorizationWindow { DataContext = authorizationWindowViewModel };
+            authorizationWindow.Show();
         }
     }
 }

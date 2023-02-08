@@ -3,7 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
+using System.Windows;
+using ChemReactOptimization.Data;
 using WPF_MVVM_Classes;
 using ViewModelBase = ChemReactOptimization.Services.ViewModelBase;
 
@@ -13,6 +16,17 @@ namespace ChemReactOptimization.ViewModel
     {
         string _login = String.Empty;
         string _password = String.Empty;
+
+        private readonly EFMethods _efMethods;
+        private readonly EFTasks _efTasks; 
+        private readonly EFUsers _efUsers;
+
+        public AuthorizationWindowViewModel(EFMethods efMethods, EFTasks efTasks, EFUsers efUsers)
+        {
+            _efMethods = efMethods;
+            _efTasks = efTasks;
+            _efUsers = efUsers;
+        }
 
         public string Login
         {
@@ -39,7 +53,33 @@ namespace ChemReactOptimization.ViewModel
             {
                 return new RelayCommand(r =>
                 {
-                    
+                    var userList = _efUsers.GetAllUsers();
+                    var user = userList.FirstOrDefault(x => x.Login == Login);
+                    if (user == null)
+                    {
+                        MessageBox.Show($"Введенные логин и (или) пароль некорректны.", "Авторизация",
+                            MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    else
+                    {
+                        if (user.Password != Password)
+                        {
+                            MessageBox.Show($"Введенные логин и (или) пароль некорректны.", "Авторизация",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                        else
+                        {
+                            if (user.Role == "Researcher")
+                            {
+                                var mainWindow = new MainWindow();
+                                mainWindow.DataContext = new MainWindowViewModel(_efMethods,_efTasks,_efUsers);
+                                mainWindow.Show();
+                                Application.Current.MainWindow.Close();
+                            }
+                        }
+                    }
                 });
             }
         }
