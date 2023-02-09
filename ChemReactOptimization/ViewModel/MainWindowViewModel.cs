@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using ChemReactOptimization.Data;
 using ChemReactOptimization.Model;
@@ -120,15 +121,32 @@ namespace ChemReactOptimization.ViewModel
                 {
                     if (TaskSelected.Name != null)
                     {
-                        string errString = String.Empty;
+                        var errString = new StringBuilder();
+                        if (DataModel.Alpha <= 0)
+                            errString.Append("α должен быть положительным.\n");
+                        if (DataModel.Beta <= 0)
+                            errString.Append("β должен быть положительным.\n");
+                        if (DataModel.Mu <= 0)
+                            errString.Append("μ должен быть положительным.\n");
+                        if (DataModel.Delta <= 0)
+                            errString.Append("Δ должен быть положительным.\n");
+                        if (DataModel.G <= 0)
+                            errString.Append("G должен быть положительным.\n");
+                        if (DataModel.A <= 0)
+                            errString.Append("A должен быть положительным.\n");
+                        if (DataModel.N <= 0)
+                            errString.Append("N должен быть положительным.\n");
                         if (DataModel.T1Min > DataModel.T1Max)
-                            errString += "Минимальное значение Т1 не может быть больше максимального\n";
+                            errString.Append("Минимальное значение Т1 не может быть больше максимального.\n");
                         if (DataModel.T2Min > DataModel.T2Max)
-                            errString += "Минимальное значение Т2 не может быть больше максимального\n";
+                            errString.Append("Минимальное значение Т2 не может быть больше максимального.\n");
                         if (DataModel.TSumMax <= 0)
-                            errString += "Сумма Т1 и Т2 должна быть положительной";
+                            errString.Append("Сумма Т1 и Т2 должна быть положительной.");
                         if (errString.Length > 0)
-                            MessageBox.Show(errString, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        {
+                            MessageBox.Show(errString.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                            errString.Clear();
+                        }
                         else
                         {
                             if (MethodSelected.Id == MethodList.FirstOrDefault(x => x.Name.Contains("Нелдер")).Id)
