@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace ChemReactOptimization
 {
@@ -10,6 +11,11 @@ namespace ChemReactOptimization
         public AuthorizationWindow()
         {
             InitializeComponent();
+        }
+
+        private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password;
         }
     }
 }
