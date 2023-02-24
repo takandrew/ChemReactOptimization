@@ -154,6 +154,11 @@ namespace ChemReactOptimization.ViewModel
                                 MethodNelderMead.Start(DataModel, out var point3D);
                                 DataList = point3D;
                             }
+                            else if (MethodSelected.Id == MethodList.FirstOrDefault(x => x.Name.Contains("Бокс")).Id)
+                            {
+                                var methodbox = new MethodBox(DataModel, out var point3D);
+                                DataList = point3D;
+                            }
                             else
                             {
                                 MessageBox.Show("Данный метод еще не реализован в программном комплексе", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

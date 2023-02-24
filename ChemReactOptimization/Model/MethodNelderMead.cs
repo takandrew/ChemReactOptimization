@@ -185,9 +185,10 @@ namespace ChemReactOptimization.Model
             {
                 points3D.Add(item);
             }
-            string toBeShown = $"Т1: {Math.Round(result[0], 4)}  Т2: {Math.Round(result[1], 4)}\nКоличество вызовов функции: {num_of_functioncalls}";
+            string toBeShown = $"Т1: {Math.Round(result[0], 4)}\nТ2: {Math.Round(result[1], 4)}\n";
             var minValue = points3D.FirstOrDefault(x => x.X == Math.Round(result[0], 4) && x.Y == Math.Round(result[1], 4));
-            toBeShown += $"\nМинимум: {minValue.Z}";
+            toBeShown += $"Минимум: {minValue.Z}\n";
+            toBeShown += $"Количество вызовов функции: {num_of_functioncalls}";
             MessageBox.Show(toBeShown);
 
             num_of_functioncalls = 0;

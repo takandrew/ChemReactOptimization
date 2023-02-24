@@ -17,5 +17,7 @@ namespace ChemReactOptimization.Model
             Y = y;
             Z = z;
         }
+        public Point3D()
+        { }
     }
 }
