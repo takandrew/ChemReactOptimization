@@ -116,8 +116,10 @@ public class MethodBox
         }
     }
 
-    public List<Point3D> Calc(List<Point3D> points)
+    public List<Point3D> Calc(out List<Point3D> points)
     {
+        points = new List<Point3D>();
+
         // определяем количество вершин комплекса
         var countPoint = 0;
         if (_dataModel.N <= 5)
@@ -326,15 +328,14 @@ public class MethodBox
                 _ValuesFunc[extrPoint.Last(x => x.Flag == 0).Index] = newPointF;
                 points.Add(new Point3D(Math.Round(newPoint.X, 4), Math.Round(newPoint.Y, 4), Math.Round(newPointF, 4)));
             }
-            return points;
         }
     }
 
     public MethodBox(DataModel dataModel, out List<Point3D> points3D)
     {
         _dataModel = dataModel;
-        points3D = new List<Point3D>();
-        points3D = Calc(points3D);
+        //points3D = new List<Point3D>();
+        points3D = Calc(out points3D);
         var temp = new List<double>();
 
         foreach (var item in points3D)
