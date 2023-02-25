@@ -100,7 +100,7 @@ public class MethodBox
         {
 
             // проверяем что найденная вершина удовлетворяет ограничениям второго рода
-            if (_StartPoints[i].X * 0.5 + _StartPoints[i].Y <= _dataModel.TSumMax)
+            if (_StartPoints[i].X + _StartPoints[i].Y <= _dataModel.TSumMax)
             {
                 _ComplexPoints[countComplexPoints] = new Point(_StartPoints[i].X, _StartPoints[i].Y);
 
@@ -160,7 +160,7 @@ public class MethodBox
             _ErrorPoints[i].X = 0.5 * (_ErrorPoints[i].X + (1 / (countComplexPoints)) * sumComplexPointsX);
             _ErrorPoints[i].Y = 0.5 * (_ErrorPoints[i].Y + (1 / (countComplexPoints)) * sumComplexPointsY);
 
-            if (_ErrorPoints[i].X * 0.5 + _ErrorPoints[i].Y <=
+            if (_ErrorPoints[i].X + _ErrorPoints[i].Y <=
                 _dataModel.TSumMax) // проверяем что в найденной вершине выполняются ограничения второго рода
             {
                 _ComplexPoints[countComplexPoints] = new Point(_ErrorPoints[i].X, _ErrorPoints[i].Y);
@@ -305,7 +305,7 @@ public class MethodBox
 
                 // проверка ограничений второго рода
                 // пока ограничение не выполняется смещаем координату к центру
-                while ((newPoint.X * 0.5 + newPoint.Y) > _dataModel.TSumMax)
+                while ((newPoint.X + newPoint.Y) > _dataModel.TSumMax)
                 {
                     newPoint.X = 0.5 * (newPoint.X + centerPoint.X);
                     newPoint.Y = 0.5 * (newPoint.Y + centerPoint.Y);
@@ -334,7 +334,6 @@ public class MethodBox
     public MethodBox(DataModel dataModel, out List<Point3D> points3D)
     {
         _dataModel = dataModel;
-        //points3D = new List<Point3D>();
         points3D = Calc(out points3D);
         var temp = new List<double>();
 

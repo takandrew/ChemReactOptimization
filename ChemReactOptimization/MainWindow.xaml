@@ -19,6 +19,7 @@
         <Grid Grid.Row="0">
             <Menu Grid.Row="0">
                 <MenuItem Header="Файл">
+                    <MenuItem Header="Экспорт результата" Command="{Binding ExportCommand}"></MenuItem>
                     <MenuItem Header="2D-график" Command="{Binding Chart2DCommand}"/>
                     <MenuItem Header="3D-график" Command="{Binding Chart3DCommand}"/>
                 </MenuItem>
