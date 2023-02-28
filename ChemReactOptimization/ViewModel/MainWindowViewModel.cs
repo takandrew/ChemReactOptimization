@@ -150,7 +150,11 @@ namespace ChemReactOptimization.ViewModel
                         }
                         else
                         {
-                            if (MethodSelected.Id == MethodList.FirstOrDefault(x => x.Name.Contains("Нелдер")).Id)
+                            if (MethodSelected.Id == 0)
+                            {
+                                MessageBox.Show("Выберите метод.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            else if (MethodSelected.Id == MethodList.FirstOrDefault(x => x.Name.Contains("Нелдер")).Id)
                             {
                                 MethodNelderMead.Start(DataModel, out var point3D);
                                 DataList = point3D;
@@ -167,7 +171,7 @@ namespace ChemReactOptimization.ViewModel
                             }
                             else
                             {
-                                MessageBox.Show("Данный метод еще не реализован в программном комплексе", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show("Данный метод еще не реализован в программном комплексе.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         }
                     }
@@ -185,8 +189,14 @@ namespace ChemReactOptimization.ViewModel
             {
                 return new RelayCommand(r =>
                 {
-                    var test = new Chart2DWindow(DataList as List<Point3D>, DataModel);
-                    test.Show();
+                    if (DataList != null) {
+                        var test = new Chart2DWindow(DataList as List<Point3D>, DataModel);
+                        test.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Для построения графика необходимо сначала произвести расчеты.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 });
             }
         }
@@ -197,8 +207,15 @@ namespace ChemReactOptimization.ViewModel
             {
                 return new RelayCommand(r =>
                 {
-                    var test = new Chart3DWindow(DataList as List<Point3D>, DataModel);
-                    test.Show();
+                    if (DataList != null)
+                    {
+                        var test = new Chart3DWindow(DataList as List<Point3D>, DataModel);
+                        test.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Для построения графика необходимо сначала произвести расчеты.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 });
             }
         }
